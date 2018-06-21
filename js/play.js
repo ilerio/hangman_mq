@@ -1,5 +1,5 @@
 let word = "";
-let inprogress = [];
+let inProgress = [];
 let life = 8;
 let wordLength;
 
@@ -12,15 +12,15 @@ function init() {
   wordLength = word.length;
 
   for (let i=0; i<wordLength; i++) {
-    inprogress[i] = "_";
+    inProgress[i] = "_";
   }
 
-  $('#display').text(inprogress.join(''));
+  $('#display').text(inProgress.join(''));
   $("#display-and-buttons").css("display","inline");
 }
 
 function guess(letter) {
-  $("#"+letter).prop("disabled", true);
+  $("#"+letter).prop("disabled", true); // disable to disallow double clicks
   let flag = false;
 
   for (let i=0; i<wordLength; i++) {
@@ -36,8 +36,8 @@ function guess(letter) {
 }
 
 function rightGuess(index, letter) {
-  inprogress[index] = letter;
-  $("#display").text(inprogress.join(''));
+  inProgress[index] = letter;
+  $("#display").text(inProgress.join(''));
   checkWinState();
 }
 
@@ -48,7 +48,7 @@ function wrongGuess() {
 }
 
 function checkWinState() {
-  if (word === inprogress.join('')) {
+  if (word === inProgress.join('')) {
     $("#hm-img").prop("src","imgs/win.jpg");
     displayWinState(`Congratulations! You got the word ${word}.`);
   } else if(life < 0) {
