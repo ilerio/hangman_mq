@@ -3,7 +3,10 @@ let inprogress = [];
 let life = 8;
 let wordLength;
 
-init(); // Call init to begin game
+// Call init to begin game
+$(function() {
+  init();
+});
 function init() {
   word = getWord();
   wordLength = word.length;
@@ -13,6 +16,7 @@ function init() {
   }
 
   $('#display').text(inprogress.join(''));
+  $("#display-and-buttons").css("display","inline");
 }
 
 function guess(letter) {
@@ -55,7 +59,7 @@ function checkWinState() {
 
 function displayWinState(msg) {
   $("#message").text(msg);
-  $("#a-z-buttons").css("display","none");
+  $("#display-and-buttons").css("display","none");
   $("#winstate").css("display","inline");
 }
 

@@ -10,6 +10,9 @@
   .btn {
     margin-top: 5px;
   }
+  #display-and-buttons {
+    display: none; // to prevent clicking of buttons before the word is loaded
+  }
   </style>
 </head>
 <body>
@@ -18,7 +21,7 @@
       <img id="hm-img" class="img-responsive" src="imgs/hm8.jpg" alt="">
     </div>
     <div class="row">
-      <div id="a-z-buttons" class="container jumbotron">
+      <div id="display-and-buttons" class="container jumbotron">
         <h1 id="display"></h1>
         <button id="a" onclick="guess(this.id)" class="btn btn-md btn-secondary">A</button>
         <button id="b" onclick="guess(this.id)" class="btn btn-md btn-secondary">B</button>
