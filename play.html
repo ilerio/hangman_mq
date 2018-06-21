@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Play Hangman</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Fira+Mono" rel="stylesheet">
+  <link rel="stylesheet" href="css/master.css">
+  <style media="screen">
+  .btn {
+    margin-top: 5px;
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="hm-pic">
+        <img class="img-responsive center-block" src="imgs/hm0.jpg" alt="">
+      </div>
+    </div>
+    <div class="row">
+      <div id="a-z-buttons" class="container jumbotron">
+        <h1 id="display">Word</h1>
+        <button id="A" onclick="guess(this.id)" class="btn btn-md btn-secondary input">A</button>
+        <button id="B" onclick="guess(this.id)" class="btn btn-md btn-secondary input">B</button>
+        <button id="C" onclick="guess(this.id)" class="btn btn-md btn-secondary input">C</button>
+        <button id="D" onclick="guess(this.id)" class="btn btn-md btn-secondary input">D</button>
+        <button id="E" onclick="guess(this.id)" class="btn btn-md btn-secondary input">E</button>
+        <button id="F" onclick="guess(this.id)" class="btn btn-md btn-secondary input">F</button>
+        <button id="G" onclick="guess(this.id)" class="btn btn-md btn-secondary input">G</button>
+        <button id="H" onclick="guess(this.id)" class="btn btn-md btn-secondary input">H</button>
+        <button id="I" onclick="guess(this.id)" class="btn btn-md btn-secondary input">I</button>
+        <button id="J" onclick="guess(this.id)" class="btn btn-md btn-secondary input">J</button>
+        <button id="K" onclick="guess(this.id)" class="btn btn-md btn-secondary input">K</button>
+        <button id="L" onclick="guess(this.id)" class="btn btn-md btn-secondary input">L</button>
+        <button id="M" onclick="guess(this.id)" class="btn btn-md btn-secondary input">M</button>
+        <button id="N" onclick="guess(this.id)" class="btn btn-md btn-secondary input">N</button>
+        <button id="O" onclick="guess(this.id)" class="btn btn-md btn-secondary input">O</button>
+        <button id="P" onclick="guess(this.id)" class="btn btn-md btn-secondary input">P</button>
+        <button id="Q" onclick="guess(this.id)" class="btn btn-md btn-secondary input">Q</button>
+        <button id="R" onclick="guess(this.id)" class="btn btn-md btn-secondary input">R</button>
+        <button id="S" onclick="guess(this.id)" class="btn btn-md btn-secondary input">S</button>
+        <button id="T" onclick="guess(this.id)" class="btn btn-md btn-secondary input">T</button>
+        <button id="U" onclick="guess(this.id)" class="btn btn-md btn-secondary input">U</button>
+        <button id="V" onclick="guess(this.id)" class="btn btn-md btn-secondary input">V</button>
+        <button id="W" onclick="guess(this.id)" class="btn btn-md btn-secondary input">W</button>
+        <button id="X" onclick="guess(this.id)" class="btn btn-md btn-secondary input">X</button>
+        <button id="Y" onclick="guess(this.id)" class="btn btn-md btn-secondary input">Y</button>
+        <button id="Z" onclick="guess(this.id)" class="btn btn-md btn-secondary input">Z</button>
+      </div>
+      <div id="winstate" class="container" style="display: none">
+        <h2 id="message"></h2>
+        <button id="reset" onclick="resetGame()" class="btn btn-primary input">play again</button>
+        <button id="quit" onclick="endGame()" class="btn btn-danger input">quit</button>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/words.js"></script>
+<script src="js/play.js"></script>
+</html>
