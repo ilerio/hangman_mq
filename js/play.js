@@ -13,9 +13,6 @@ function init() {
   }
 
   $('#display').text(inprogress.join(''));
-
-  // DEBUG:
-  console.log(word);
 }
 
 function guess(letter) {
