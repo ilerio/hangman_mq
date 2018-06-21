@@ -1,3 +1,8 @@
 body {
   font-family: 'Fira Mono', monospace;
 }
+
+#hm-img {
+  width: 200px;
+  margin: 20px auto;
+}

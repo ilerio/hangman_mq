@@ -1,137 +1,67 @@
-//Variables
-var score = 0;
-var word = "";
-var mult = 1;
-var guessedWord;
-var numWrong = 0;
-var life = 0; // goes up not down (images)
-var inprogress = "";
-var flag = false;
-var index = [];
-var MAX; // word length
+let word = "";
+let inprogress = [];
+let life = 8;
+let wordLength;
 
-init();
+init(); // Call init to begin game
 function init() {
   word = getWord();
+  wordLength = word.length;
+
+  for (let i=0; i<wordLength; i++) {
+    inprogress[i] = "_";
+  }
+
+  $('#display').text(inprogress.join(''));
+
+  // DEBUG:
   console.log(word);
 }
 
-function guess(str)
-{
-  guessedWord = str.toLocaleLowerCase();
-  $("#"+str).prop("disabled", true);
-  //window.console.log("guessedWord = " + str);// for debugging
+function guess(letter) {
+  $("#"+letter).prop("disabled", true);
+  let flag = false;
 
-  for(var i=0;i<MAX;i++)
-  {
-    if (word.charAt(i) === guessedWord)
-    {
+  for (let i=0; i<wordLength; i++) {
+    if (letter === word.charAt(i)) {
+      rightGuess(i, letter);
       flag = true;
-      index[i] = str;
-      mult++;//increment multiplier for each individual letter (e.g. l[ee]ch -> e x2)
     }
   }
 
-  if (flag === true)
-  {
-    var temp = inprogress;
-    inprogress = "";
-
-    var debug = "";
-
-    for(var i=0; i<MAX; i++)
-    {
-      debug += "[" + index[i] + "]";
-      if(index[i] !== -1)
-      {
-        inprogress += index[i];
-      }
-      else
-      {
-        inprogress += temp.charAt(i);
-      }
-    }
-    inprogress = inprogress.toLocaleLowerCase();
-    $("#display").text(inprogress);
-    score += (19 * (mult));
-    flag = false;
-    //window.console.log(debug);
-    //window.console.log("mult = " + mult); // for debugging
-    //window.console.log("score = " + score);//debug
-
-    if(word === inprogress)
-    {
-      $("#" + life).css("display","none");
-      $("#win").css("display","inline");
-      winState(word + ": Congratulations you win!");
-    }
-    else
-    {
-      //window.console.log("done = " + word + " === " + inprogress + " = " + (word === inprogress) + "\n\n");//debug
-    }
-  }
-  else
-  {
-    //window.console.log("life = " + life);//debug
-    numWrong++;
-    mult = ((mult - 1) < 1)? 1 : mult - 1; // multiplier decrement
-    $("#" + life).css("display","none");
-    $("#" + (++life)).css("display","inline");
-    score = ((score - (7*numWrong) < 0)? 0 : (score - (7*numWrong)));
-    if(score < 0){score = 0;};
-    //window.console.log("mult = " + mult); // for debugging
-    //window.console.log("score = " + score);//debug
-
-    if(life === 8)
-    {
-      $("#" + life).css("display","none");
-      $("#dead").css("display","inline");
-      winState("Oh, so sorry but you lose! The word was " + word + ".");
-    }
-    else
-    {
-      //window.console.log("dead = " + (life === 8) + "\n\n");
-    }
+  if (!flag) {
+    wrongGuess();
   }
 }
 
-function winState(str)
-{
-  $("#message").text(str);
+function rightGuess(index, letter) {
+  inprogress[index] = letter;
+  $("#display").text(inprogress.join(''));
+  checkWinState();
+}
+
+function wrongGuess() {
+  life--;
+  $("#hm-img").prop("src",`imgs/hm${life}.jpg`);
+  checkWinState();
+}
+
+function checkWinState() {
+  if (word === inprogress.join('')) {
+    $("#hm-img").prop("src","imgs/win.jpg");
+    displayWinState(`Congratulations! You got the word ${word}.`);
+  } else if(life < 0) {
+    $("#hm-img").prop("src","imgs/lose.jpg");
+    displayWinState(`Sorry, you lose! The word was ${word}.`);
+  }
+}
+
+function displayWinState(msg) {
+  $("#message").text(msg);
   $("#a-z-buttons").css("display","none");
   $("#winstate").css("display","inline");
 }
 
-function resetGame()
-{
-  //window.console.log("resetGame()");
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function() {
-    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-      var response = xmlhttp.responseText;
-      //window.console.log(response);
-      if (response === "true"){
-        location.reload();
-      }
-    };
-  };
-  xmlhttp.open("GET", "save_score.php?score=" + score, true);
-  xmlhttp.send();
-}
-
-function endGame()
-{
-  //window.console.log("endGame()");
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function() {
-    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-      var response = xmlhttp.responseText;
-      window.console.log(response);
-      if (response === "true"){
-        location.replace("home.php");
-      }
-    };
-  };
-  xmlhttp.open("GET", "save_score.php?score=" + score, true);
-  xmlhttp.send();
+function resetGame() {
+  location.reload();
 }
